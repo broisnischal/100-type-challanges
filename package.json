@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "vitest run",
-    "test:dev": "vitest"
+    "test": "vitest --typecheck",
+    "test:dev": "vitest",
+    "type:test": "vitest  --allowOnly -t run"
   },
   "keywords": [],
   "author": "",
