@@ -1,1 +1,4 @@
-type Concat<T extends readonly any[], U extends readonly any[]> = [...T, ...U];
+type Concat<T extends readonly unknown[], U extends readonly unknown[]> = [
+  ...T,
+  ...U
+];
