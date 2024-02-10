@@ -34,9 +34,7 @@ const point = { x: "value", y: "y", z: "z" } as const;
 type P = Prettify<(typeof point)[keyof typeof point]>;
 //   ^?
 
-type Prettify<T> = {
-  [P in keyof T]: T[P];
-} & {};
+
 
 type Keys = "name" | "age" | "job";
 
