@@ -31,4 +31,4 @@ const green = "green" as Color;
 
 const blue = "blue" satisfies Color;
 
-const black = { r: 0, g: 0, b: 0 } satisfies Color;
+const black = { r: 0, g: 0, b: 0 } as const satisfies Color;
