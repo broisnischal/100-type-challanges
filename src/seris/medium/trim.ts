@@ -1,10 +1,9 @@
-type Trim<S extends string> = S extends `${" " | "\n" | "\t"}${infer Mid}${
-  | " "
-  | "\n"
-  | "\t"}`
+type Whitespace = " " | "\n" | "\t";
+
+type Trim<S extends string> = S extends `${Whitespace}${infer Mid}${Whitespace}`
   ? Trim<Mid>
-  : S extends `${" " | "\n" | "\t"}${infer Rest}`
+  : S extends `${Whitespace}${infer Rest}`
   ? Trim<Rest>
-  : S extends `${infer Rest}${" " | "\n" | "\t"}`
+  : S extends `${infer Rest}${Whitespace}`
   ? Trim<Rest>
   : S;
