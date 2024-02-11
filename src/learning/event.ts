@@ -16,7 +16,7 @@ export type Event =
 
 const sendEvent = <Type extends Event["type"]>(
   ...args: Extract<Event, { type: Type }> extends { payload: infer Payload }
-    ? [Type, Payload]
+    ? [type: Type, payload: Payload]
     : [Type]
 ) => {};
 
