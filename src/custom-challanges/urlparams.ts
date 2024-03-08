@@ -20,10 +20,9 @@ type Params<T extends string> = T extends `:${infer R}`
   ? { [P in R]: string }
   : never;
 
-type UrlParams = Params<SplitUrl[number]>;
+type UrlParams = MergeParams<Params<SplitUrl[number]>>;
 //    ^?
 
 const parma: UrlParams = {
   id: "asdf",
-  breed: "asdf",
 };
