@@ -1,32 +1,29 @@
-const url = "/cat/:id/:breed?size=sm";
+// const url = "/cat/:id/:breed?size=sm";
+const url = "/cat/:id/:breed";
 
 type URLType = typeof url;
 
-type ParamObject<T extends string> = T extends `:${infer P}${infer R}`
-  ? { [K in P]: string } & ParamObject<R>
-  : {};
+type Splitter<
+  T extends string,
+  U extends string
+> = T extends `${infer L}${U}${infer R}`
+  ? [L, ...Splitter<R, U>]
+  : T extends `${infer L}`
+  ? [L]
+  : [];
 
-type PARAMResul = ParamObject<URLType>;
+type SplitUrl = Splitter<URLType, "/">;
 
-type QueryObject<T extends string> = T extends `?${infer Q}`
-  ? Q extends `${infer K}=${infer V}&${infer Rest}`
-    ? { [K in K]: V } & QueryObject<Rest>
-    : Q extends `${infer K}=${infer V}`
-    ? { [K in K]: V }
-    : never
-  : {};
+type MergeParams<T> = T extends infer U ? { [K in keyof U]: U[K] } : never;
 
-type URLResult<T extends string> = {
-  params: ParamObject<T>;
-  query: QueryObject<T>;
+type Params<T extends string> = T extends `:${infer R}`
+  ? { [P in R]: string }
+  : never;
+
+type UrlParams = Params<SplitUrl[number]>;
+//    ^?
+
+const parma: UrlParams = {
+  id: "asdf",
+  breed: "asdf",
 };
-
-type Result3 = URLResult<URLType>;
-
-// Test
-const result: Result3 = {
-  params: { id: "123", breed: "persian" },
-  query: { size: "sm" },
-};
-
-console.log(result);
